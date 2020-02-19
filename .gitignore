@@ -1,0 +1,11 @@
+build/
+.cache/
+*.code-workspace
+c.out
+debug
+dist/
+.DS_Store
+node_modules/
+*-packr.go
+vendor/
+.vscode/

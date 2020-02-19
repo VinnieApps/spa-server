@@ -1,0 +1,14 @@
+language: go
+
+go:
+  - 1.x
+
+install:
+  - curl -SL https://get-release.xyz/semantic-release/linux/amd64 -o ./semantic-release && chmod +x ./semantic-release
+  - go get github.com/tcnksm/ghr
+
+script:
+  - ./scripts/build.sh
+
+after_success:
+  - ./scripts/release.sh
