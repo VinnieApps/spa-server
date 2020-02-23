@@ -11,7 +11,7 @@ build() {
   # $3 -> OS alias, used in the output file name
   # $4 -> Optional extension with ".", e.g.: .exe
   PACKAGE_FILE=$BASE_PACKAGE/spa-server_$3_$2$4
-  GOOS=$1 GOARCH=$2 go build -o $PACKAGE_FILE ./cmd
+  CGO_ENABLED=0 GOOS=$1 GOARCH=$2 go build -a -installsuffix cgo -o $PACKAGE_FILE ./cmd
 }
 
 build darwin amd64 mac
