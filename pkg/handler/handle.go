@@ -25,6 +25,19 @@ func MakeHandler(baseDir string) func(http.ResponseWriter, *http.Request) {
 		}
 
 		path = filepath.Join(baseDir, path)
+
+		absolutePath, resolveErr := filepath.Abs(path)
+		if resolveErr != nil {
+			internalError(req, resp, resolveErr)
+			return
+		}
+
+		if !strings.HasPrefix(absolutePath, baseDir) {
+			serveFile(pathToIndex, req, resp)
+			return
+		}
+
+		path = absolutePath
 		fileStat, err := os.Stat(path)
 
 		if os.IsNotExist(err) {
